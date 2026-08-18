@@ -13,9 +13,9 @@
 ## 실행
 
 ```bash
-pnpm install
-pnpm run build
-pnpm run dev
+npm install
+npm run build
+npm run dev
 ```
 
 브라우저에서 `http://localhost:4173`을 엽니다.
