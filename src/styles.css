@@ -28,6 +28,30 @@
 .drop-subtitle { color:#93a19f; font-size:12px; }
 .template-status { margin-top:9px; min-height:24px; color:#5d716e; font-size:14px; font-weight:700; line-height:1.6; }
 .template-status.has-error { color:#d96549; }
+.result-actions { display:flex; align-items:center; gap:6px; }
+.result-action { color:var(--mint-dark); background:#edfbf5; border:1px solid #bcebd9; border-radius:6px; padding:7px 9px; font-size:10px; font-weight:700; cursor:pointer; }
+.result-action:disabled { color:#aab3b4; background:#f5f7f6; border-color:#e5eae8; cursor:default; }
+.saved-report-shell { min-height:100vh; background:var(--bg); }
+.saved-topbar { height:74px; padding:0 clamp(22px,5vw,72px); display:flex; align-items:center; justify-content:space-between; background:#fff; border-bottom:1px solid #e9edec; }
+.saved-topbar button { color:#536461; background:#f2f7f5; border:1px solid #d7e5df; border-radius:6px; padding:9px 12px; font-size:12px; cursor:pointer; }
+.saved-report-card { max-width:920px; margin:40px auto; padding:clamp(24px,5vw,52px); background:#fff; border:1px solid #e2e7e5; border-radius:16px; }
+.saved-report-card h1 { font-size:clamp(28px,4vw,48px); margin:0 0 12px; }
+.saved-meta { color:#758481; font-size:13px; margin:0 0 30px; }
+.saved-provider { border-top:1px solid #e6ece9; padding:22px 0; }
+.saved-provider.saved-error { color:#c56550; }
+.saved-provider-head { display:flex; justify-content:space-between; color:#627370; font:11px 'DM Mono'; }
+.saved-provider-head b { color:var(--mint-dark); font:12px 'Noto Sans KR'; }
+.saved-error .saved-provider-head b { color:#d96549; }
+.saved-provider small { display:block; color:#9da9a6; font:10px 'DM Mono'; margin-top:8px; }
+.saved-text { white-space:pre-wrap; color:#4f5e62; font-size:15px; line-height:2; margin-top:14px; }
+.saved-provider h4 { color:#e87552; font-size:12px; margin:20px 0 8px; }
+.saved-provider ol { margin:0; padding-left:24px; }
+.saved-provider li { color:#74827f; font-size:12px; line-height:1.6; margin:5px 0; }
+.saved-provider a { color:inherit; overflow-wrap:anywhere; }
+.saved-empty { min-height:100vh; display:grid; place-content:center; justify-items:center; gap:14px; color:#697875; text-align:center; }
+.saved-empty h1 { font-size:24px; }
+.saved-empty a { color:var(--mint-dark); font-size:14px; }
+@media print { .saved-topbar button { display:none; } .saved-report-card { margin:0; border:0; } }
 .result-text { font-size:14px; line-height:1.9; }
 .error-copy, .no-sources, .sources-list li { font-size:12px; }
 .empty-state h3 { font-size:16px; }

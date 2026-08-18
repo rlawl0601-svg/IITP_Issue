@@ -15,6 +15,7 @@ const state = {
   sessionStatus: (sessionStorage.getItem(storageKeys.openai) || sessionStorage.getItem(storageKeys.gemini)) ? 'saved' : 'empty',
   apiError: '',
   template: { fileName: '', markdown: '', status: 'empty', error: '' },
+  savedReportId: '',
 };
 
 const app = document.querySelector('#app');
@@ -75,7 +76,7 @@ function render() {
         </section>
 
         <section class="card result-card" aria-labelledby="result-title">
-          <div class="card-heading result-heading"><div><span class="step">02</span><h2 id="result-title">생성 결과</h2></div><button class="icon-button" id="copy" title="결과 복사" ${state.report ? '' : 'disabled'}>⌘</button></div>
+          <div class="card-heading result-heading"><div><span class="step">02</span><h2 id="result-title">생성 결과</h2></div><div class="result-actions"><button class="result-action" id="save-report" ${state.searchResults ? '' : 'disabled'}>${state.savedReportId ? '저장됨' : '보고서 저장'}</button><button class="result-action" id="open-report" ${state.searchResults ? '' : 'disabled'}>새 탭에서 보기</button><button class="icon-button" id="copy" title="결과 복사" ${state.searchResults ? '' : 'disabled'}>⌘</button></div></div>
           ${state.isLoading ? loadingMarkup() : state.searchResults ? resultsMarkup(state.searchResults) : emptyMarkup()}
         </section>
       </div>
@@ -143,7 +144,26 @@ function bindEvents() {
     }
   });
   document.querySelector('#reset-input').addEventListener('click', () => { state.input = ''; state.report = null; state.searchResults = null; state.apiError = ''; render(); });
-  document.querySelector('#copy')?.addEventListener('click', async () => { if (state.report) { await navigator.clipboard.writeText(state.report.sections.map(([t, v]) => `${t}\n${v}`).join('\n\n')); document.querySelector('#copy').textContent = '✓'; } });
+  document.querySelector('#save-report').addEventListener('click', saveCurrentReport);
+  document.querySelector('#open-report').addEventListener('click', openSavedReport);
+  document.querySelector('#copy')?.addEventListener('click', async () => { if (state.searchResults) { await navigator.clipboard.writeText(state.searchResults.map((result) => `${result.provider}\n${result.text || result.error || ''}`).join('\n\n')); document.querySelector('#copy').textContent = '✓'; } });
+}
+
+function reportRecord() {
+  return { input: state.input, reportTypeLabel: state.reportType === 'onePager' ? '보고용 1장 페이퍼' : '현황-문제점-대응방향', period: state.period, sources: state.sources, results: state.searchResults };
+}
+
+function saveCurrentReport() {
+  if (!state.searchResults) return '';
+  const saved = window.reportStorage.saveReport(reportRecord());
+  state.savedReportId = saved.id;
+  render();
+  return saved.id;
+}
+
+function openSavedReport() {
+  const id = state.savedReportId || saveCurrentReport();
+  if (id) window.open(`report.html?id=${encodeURIComponent(id)}`, '_blank', 'noopener');
 }
 
 async function handleTemplateUpload(event) {
