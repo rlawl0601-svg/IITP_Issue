@@ -20,6 +20,10 @@ pnpm run dev
 
 브라우저에서 `http://localhost:4173`을 엽니다.
 
+## Vercel 배포
+
+`vercel.json`이 정적 화면과 `/api/search`, `/api/template` 요청을 Node.js 핸들러로 연결합니다. Vercel 프로젝트의 Framework Preset은 `Other`로 두고, 별도 Build Command 없이 배포할 수 있습니다.
+
 ## 보안
 
 API 키는 서버 환경변수나 저장소에 포함하지 않습니다. 사용자가 화면에서 입력한 키는 현재 브라우저 세션 동안 요청 본문으로만 전달됩니다. `.env*` 파일과 `.vercel`은 Git에 커밋되지 않습니다.

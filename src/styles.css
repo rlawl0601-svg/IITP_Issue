@@ -26,7 +26,8 @@
 .drop-icon { color:var(--mint-dark); font-size:25px; line-height:1; font-weight:700; }
 .drop-title { color:var(--ink); font-size:14px; font-weight:800; }
 .drop-subtitle { color:#93a19f; font-size:12px; }
-.template-status { margin-top:9px; font-size:12px; }
+.template-status { margin-top:9px; min-height:24px; color:#5d716e; font-size:14px; font-weight:700; line-height:1.6; }
+.template-status.has-error { color:#d96549; }
 .result-text { font-size:14px; line-height:1.9; }
 .error-copy, .no-sources, .sources-list li { font-size:12px; }
 .empty-state h3 { font-size:16px; }

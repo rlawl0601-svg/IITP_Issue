@@ -8,7 +8,7 @@ import { POST as TEMPLATE_POST } from './app/api/template/route.js';
 const root = fileURLToPath(new URL('.', import.meta.url));
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
 
-const server = createServer(async (request, response) => {
+async function handleRequest(request, response) {
   try {
     if ((request.url === '/api/search' || request.url === '/api/template') && request.method === 'POST') {
       const chunks = [];
@@ -32,6 +32,8 @@ const server = createServer(async (request, response) => {
     response.writeHead(error.code === 'ENOENT' ? 404 : 500, { 'content-type': 'text/plain; charset=utf-8' });
     response.end(error.code === 'ENOENT' ? 'Not found' : 'Server error');
   }
-});
+}
 
-server.listen(4173, () => {});
+export default handleRequest;
+
+if (process.env.VERCEL !== '1') createServer(handleRequest).listen(4173, () => {});
