@@ -1,0 +1,16 @@
+{
+  "name": "briefmaker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node --check src/main.js && node --check app/api/search/route.js && node --check app/api/template/route.js && node --check server.js",
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "kordoc": "^4.8.1"
+  }
+}
